@@ -21,7 +21,26 @@ test('Create valid response', () => {
     const expected = {
         temp: 17.44,
         humidity: 90,
-        weatherDescription: ['heavy intensity rain']
+        weatherDescription: ['heavy intensity rain'],
+        errorMessage: '',
+        hasError: false
+    };
+
+    expect(response).toStrictEqual(expected);
+});
+
+test('Create fail response', () => {
+    const apiResponse = {
+        cod: '400',
+        message: 'Nothing to geocode'
+    };
+    const response = createResponse(apiResponse);
+    const expected = {
+        temp: null,
+        humidity: null,
+        weatherDescription: null,
+        hasError: true,
+        errorMessage: 'Nothing to geocode'
     };
 
     expect(response).toStrictEqual(expected);
