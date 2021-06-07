@@ -4,18 +4,22 @@
     },
     "engineStrict": true,
     "dependencies": {
-        "prompts": "^2.4.1"
+        "dotenv": "^10.0.0",
+        "got": "^11.8.2",
+        "prompts": "^2.4.1",
+        "yup": "^0.32.9"
     },
     "name": "weather",
     "version": "1.0.0",
     "description": "Fetches weather data for given place.",
     "main": "src/index.js",
     "devDependencies": {
+        "babel-eslint": "^10.1.0",
         "eslint": "^7.28.0",
         "eslint-config-airbnb-base": "^14.2.1",
-        "eslint-plugin-markdown": "^2.2.0",
         "eslint-plugin-import": "^2.23.4",
-        "babel-eslint": "^10.1.0"
+        "eslint-plugin-markdown": "^2.2.0",
+        "jest": "^27.0.4"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
