@@ -1,0 +1,25 @@
+{
+    "engines": {
+        "node": ">=12"
+    },
+    "engineStrict": true,
+    "dependencies": {
+        "prompts": "^2.4.1"
+    },
+    "name": "weather",
+    "version": "1.0.0",
+    "description": "Fetches weather data for given place.",
+    "main": "src/index.js",
+    "devDependencies": {
+        "eslint": "^7.28.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-markdown": "^2.2.0",
+        "eslint-plugin-import": "^2.23.4",
+        "babel-eslint": "^10.1.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Ioan Adrian Szabo",
+    "license": "MIT"
+}
