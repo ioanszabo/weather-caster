@@ -7,5 +7,9 @@ exports.makeCreateRequest = (validateRequest) => (place, searchType, units) => {
     if (!validateRequest(place, searchType, units)) {
         throw new Error('Invalid data for request');
     }
-    return Object.freeze({ place, searchType, units });
+    return {
+        getPlace: () => place,
+        getSearchType: () => searchType,
+        getUnits: () => units
+    };
 };
