@@ -4,9 +4,13 @@
     },
     "engineStrict": true,
     "dependencies": {
+        "clp": "^4.0.12",
         "dotenv": "^10.0.0",
+        "expand-home-dir": "^0.0.3",
+        "fs-extra": "^10.0.0",
         "got": "^11.8.2",
         "prompts": "^2.4.1",
+        "ramda": "^0.27.1",
         "yup": "^0.32.9"
     },
     "name": "weather",

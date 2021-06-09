@@ -8,7 +8,6 @@ exports.makeCreateResponse = (responseValidator) => (response) => {
     if (!responseValidator.hasValidData(response)) {
         throw new Error('Invalid response - missing data');
     }
-
     if (response.cod === 200) {
         return Object.freeze({
             getData: () => Object.freeze({

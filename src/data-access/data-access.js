@@ -1,18 +1,15 @@
-const got = require('got');
-const { createResponse } = require('../entity/response');
-
-exports.makeFindByCityName = (getByCityNameUrl) => async (cityName, options) => {
+exports.makeFetchByCityName = (getByCityNameUrl, got, createResponse) => async (request) => {
     try {
-        const response = await got(getByCityNameUrl(cityName, options));
+        const response = await got(getByCityNameUrl(request), { responseType: 'json' });
         return createResponse(response.body);
     } catch (error) {
         return createResponse(error.response.body);
     }
 };
 
-exports.makeFindByZipCode = (getByZipCodeUrl) => async (zipCode, countryCode, options) => {
+exports.makeFetchByZipCode = (getByZipCodeUrl, got, createResponse) => async (request) => {
     try {
-        const response = await got(getByZipCodeUrl(zipCode, countryCode, options));
+        const response = await got(getByZipCodeUrl(request), { responseType: 'json' });
         return createResponse(response.body);
     } catch (error) {
         return createResponse(error.response.body);
