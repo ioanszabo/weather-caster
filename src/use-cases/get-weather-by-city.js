@@ -7,5 +7,5 @@ exports.makeGetWeatherByCity = (
 ) => (cliArguments) => {
     saveLastConfig(cliArguments);
     const request = createRequest(transformToRequestEntity(cliArguments));
-    return findByCityName(request);
+    return [findByCityName(request)];
 };

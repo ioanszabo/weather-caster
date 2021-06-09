@@ -1,4 +1,6 @@
 const prompt = require('prompt-sync')();
+const { readCities } = require('../config');
+const { makeGetWeatherForMultipleCities } = require('./get-weather-for-multiple-cities');
 const { loadLastConfig } = require('../config');
 const { saveLastConfig } = require('../config');
 const { transformToRequestEntity } = require('../entity/options');
@@ -16,7 +18,13 @@ const getWeatherByCity = makeGetWeatherByCity(
 const getWeatherByZipCode = makeGetWeatherByZipCode(
     fetchWeatherByZipCode,
     transformToRequestEntity,
-    saveLastConfig);
+    saveLastConfig
+);
+const getWeatherForMultipleCities = makeGetWeatherForMultipleCities(
+    readCities,
+    fetchWeatherByCityName,
+    transformToRequestEntity
+);
 
 const showPrompt = () => {
     const t = prompt('For Fahrenheit enter f, for Celsius enter c\n>');
@@ -48,6 +56,9 @@ const useCaseFactory = (args) => {
     const useCase = router(args);
     if (useCase) {
         return useCase;
+    }
+    if (hasOwnProperty(args, 'import')) {
+        return [getWeatherForMultipleCities, args];
     }
     if (hasOwnProperty(args, 'l')) {
         const cliArgumentsFromFile = loadLastConfig();

@@ -6,15 +6,16 @@ const { getRequestData } = require('./src/entity/options');
 try {
     const cliArguments = getRequestData(clp(process.argv), createRequest);
     const [useCase, args] = useCaseFactory(cliArguments);
-
     const weatherDetails = useCase(args);
-    weatherDetails
-        .then((data) => {
+    weatherDetails.map((promiseResponse) => {
+        return promiseResponse.then((data) => {
             console.log(data.getData());
         })
-        .catch((err) => {
-            console.error(err);
-        });
+            .catch((err) => {
+                console.error(err);
+            });
+    });
+
 } catch (error) {
     console.log(error.message);
 }

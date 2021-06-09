@@ -7,5 +7,5 @@ exports.makeGetWeatherByZipCode = (
 ) => (cliArguments) => {
     saveLastConfig(cliArguments);
     const request = createRequest(transformToRequestEntity(cliArguments));
-    return findByZipCode(request);
+    return [findByZipCode(request)];
 };
