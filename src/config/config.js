@@ -39,11 +39,11 @@ exports.createDefaultConfigurationEntity = () => {
     });
 };
 
-exports.saveLastConfig = (location, data) => {
+exports.makeSaveLastConfig = (location) => (data) => {
     fsExtra.outputFileSync(location, JSON.stringify(data));
 };
 
-exports.loadLastConfig = (location) => {
+exports.makeLoadLastConfig = (location) => () => {
     const configData = fs.readFileSync(location, 'utf-8');
     return JSON.parse(configData);
 };
