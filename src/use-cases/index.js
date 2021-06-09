@@ -18,15 +18,28 @@ const getWeatherByZipCode = makeGetWeatherByZipCode(
     transformToRequestEntity,
     saveLastConfig);
 
+const showPrompt = () => {
+    const t = prompt('For Fahrenheit enter f, for Celsius enter c\n>');
+    if (['c', 'f'].indexOf(t) === -1) {
+        showPrompt();
+    } else {
+        return t;
+    }
+};
+
 const router = (args) => {
     if (hasOwnProperty(args, 'c') && hasOwnProperty(args, 't')) {
         return [getWeatherByCity, args];
     }
     if (hasOwnProperty(args, 'c')) {
-        args.t = prompt('How many more times? ');
+        args.t = showPrompt();
         return [getWeatherByCity, args];
     }
     if (hasOwnProperty(args, 'z') && hasOwnProperty(args, 't')) {
+        return [getWeatherByZipCode, args];
+    }
+    if (hasOwnProperty(args, 'z')) {
+        args.t = showPrompt();
         return [getWeatherByZipCode, args];
     }
 };
