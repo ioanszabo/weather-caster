@@ -3,13 +3,15 @@ exports.ZIPCODE_SEARCH = 2;
 exports.UNITS_CELSIUS = 'metric';
 exports.UNITS_FAHRENHEIT = 'imperial';
 
-exports.makeCreateRequest = (validateRequest) => (place, searchType, units) => {
-    if (!validateRequest(place, searchType, units)) {
-        throw new Error('Invalid data for request');
+exports.makeCreateRequest = (requestValidator) => ({ place, units }) => {
+    if (!requestValidator.validatePlace(place)) {
+        throw new Error('Value for place is not valid');
     }
-    return {
+    if (!requestValidator.validateUnits(units)) {
+        throw new Error('Value for units is not valid');
+    }
+    return Object.freeze({
         getPlace: () => place,
-        getSearchType: () => searchType,
         getUnits: () => units
-    };
+    });
 };

@@ -1,4 +1,4 @@
-const { createResponse } = require('../../../src/entity/response');
+const { createResponse } = require('../../../src/entity');
 
 test('Create valid response', () => {
     const apiResponse = {
@@ -19,24 +19,49 @@ test('Create valid response', () => {
     };
     const response = createResponse(apiResponse);
     const expected = {
-        temp: 17.44,
-        humidity: 90,
-        weatherDescription: ['heavy intensity rain']
+        data: {
+            temp: 17.44,
+            humidity: 90,
+            weatherDescription: ['heavy intensity rain']
+        },
+        hasError: false,
+        error: ''
     };
 
-    expect(response.getData()).toStrictEqual(expected);
+    expect(response.getData()).toStrictEqual(expected.data);
     expect(response.hasError()).toBeFalsy();
     expect(response.getError()).toBe('');
 });
 
-test('Create fail response', () => {
-    const apiResponse = {
-        cod: '400',
-        message: 'Nothing to geocode'
-    };
-    const response = createResponse(apiResponse);
-
-    expect(response.getData()).toBeNull();
-    expect(response.hasError()).toBeTruthy();
-    expect(response.getError()).toBe('Nothing to geocode');
+test.each([
+    [undefined, 'Missing response'],
+    [{
+        weather: [{ id: 502, main: 'Rain', description: 'heavy intensity rain', icon: '10d' }],
+        main: { temp: 17.44, feels_like: 17.59, temp_min: 15.7, temp_max: 18.93, pressure: 1020, humidity: 90 }
+    }, 'Invalid response - cod is not valid'],
+    [{
+        cod: 200,
+        weather: [{ id: 502, main: 'Rain', description: 'heavy intensity rain', icon: '10d' }]
+    }, 'Invalid response - missing data'],
+    [{
+        cod: 200,
+        weather: [{ id: 502, main: 'Rain', description: 'heavy intensity rain', icon: '10d' }],
+        main: { feels_like: 17.59, temp_min: 15.7, temp_max: 18.93, pressure: 1020 }
+    }, 'Invalid response - missing data'],
+    [{
+        cod: 200,
+        main: { temp: 17.44, feels_like: 17.59, temp_min: 15.7, temp_max: 18.93, pressure: 1020, humidity: 90 }
+    }, 'Invalid response - missing data'],
+    [{
+        cod: 200,
+        weather: {},
+        main: { temp: 17.44, feels_like: 17.59, temp_min: 15.7, temp_max: 18.93, pressure: 1020, humidity: 90 }
+    }, 'Invalid response - missing data'],
+    [{
+        cod: 200,
+        weather: [],
+        main: { temp: 17.44, feels_like: 17.59, temp_min: 15.7, temp_max: 18.93, pressure: 1020, humidity: 90 }
+    }, 'Invalid response - missing data']
+])('Should throw error', (apiResponse, error) => {
+    expect(() => createResponse(apiResponse)).toThrowError(error);
 });
