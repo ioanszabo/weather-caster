@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const clp = require('clp');
 const { fetchController } = require('./src/router');
 const { createRequest } = require('./src/entity');

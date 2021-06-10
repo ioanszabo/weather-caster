@@ -6,17 +6,13 @@
     "dependencies": {
         "clp": "^4.0.12",
         "dotenv": "^10.0.0",
-        "expand-home-dir": "^0.0.3",
         "fs-extra": "^10.0.0",
         "got": "^11.8.2",
         "ip": "^1.1.5",
         "node-fetch": "^2.6.1",
         "prompt": "^1.1.0",
-        "prompt-sync": "^4.2.0",
-        "prompts": "^2.4.1",
         "public-ip": "^4.0.4",
-        "ramda": "^0.27.1",
-        "yup": "^0.32.9"
+        "ramda": "^0.27.1"
     },
     "name": "weather",
     "version": "1.0.0",
@@ -31,7 +27,7 @@
         "jest": "^27.0.4"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest"
     },
     "author": "Ioan Adrian Szabo",
     "license": "MIT"
