@@ -41,10 +41,9 @@ test('Get correct arguments from cli', () => {
         createRequest
     );
     const expected = {
-        place: 'paris',
-        units: UNITS_CELSIUS
+        c: 'paris',
+        t: 'c'
     };
 
-    expect(cliArguments.getPlace()).toBe(expected.place);
-    expect(cliArguments.getUnits()).toBe(expected.units);
+    expect(cliArguments).toStrictEqual(expected);
 });

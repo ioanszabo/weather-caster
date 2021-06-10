@@ -20,6 +20,7 @@ test('Create valid response', () => {
     const response = createResponse(apiResponse);
     const expected = {
         data: {
+            name: 'Urdorf',
             temp: 17.44,
             humidity: 90,
             weatherDescription: ['heavy intensity rain']

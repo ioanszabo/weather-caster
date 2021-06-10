@@ -1,7 +1,7 @@
 const fsExtra = require('fs-extra');
 require('dotenv').config();
-const { makeGetUrlByCity, makeGetUrlByZipCode } = require('./config');
-const { makeLoadLastConfig, makeSaveLastConfig, makeReadCities } = require('./file');
+const { makeGetUrlByCity, makeGetUrlByZipCode } = require('./got-api-helper');
+const { makeLoadLastConfig, makeSaveLastConfig, makeReadCities } = require('./file-helper');
 
 const location = process.env.LATEST_CONFIG;
 const baseUrl = process.env.GOT_BASE_URL;
