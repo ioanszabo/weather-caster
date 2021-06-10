@@ -14,11 +14,14 @@ const showCityPrompt = () => {
     return prompt('Enter the city name> ');
 };
 
-const router = (args, weatherControllers) => {
+const router = (args, weatherControllers, getHelp) => {
     if (Object.keys(args).length === 0) {
         args.c = showCityPrompt();
         args.t = showUnitOfTemperaturePrompt();
         return [weatherControllers.getWeatherByCityController, args];
+    }
+    if (objectHelper.checkIfHasProperty(args, 'h')) {
+        return [getHelp, args];
     }
     if (objectHelper.checkIfHasProperty(args, 'c') && objectHelper.checkIfHasProperty(args, 't')) {
         return [weatherControllers.getWeatherByCityController, args];
@@ -36,8 +39,8 @@ const router = (args, weatherControllers) => {
     }
 };
 
-exports.fetchController = (weatherControllers) => (args) => {
-    const useCase = router(args, weatherControllers);
+exports.fetchController = (weatherControllers, getHelp) => (args) => {
+    const useCase = router(args, weatherControllers, getHelp);
     if (useCase) {
         return useCase;
     }
@@ -46,6 +49,6 @@ exports.fetchController = (weatherControllers) => (args) => {
     }
     if (objectHelper.checkIfHasProperty(args, 'l')) {
         const cliArgumentsFromFile = fileHelper.loadLastConfig();
-        return router(cliArgumentsFromFile, weatherControllers);
+        return router(cliArgumentsFromFile, weatherControllers, getHelp);
     }
 };
