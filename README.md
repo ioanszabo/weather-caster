@@ -58,12 +58,12 @@ node weather -h
 ```
 
 #### Notes
-- When using the `--import` and `-l` options `last-config.json` will not be updated
+- When using the `--import` or `-l` options `last-config.json` will not be updated
 
 ## :heavy_check_mark: Run tests
 ```sh
 # Run tests 
-`npm run test`
+npm run test
 ```
 
 ## :scroll: License
