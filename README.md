@@ -14,7 +14,7 @@ Weather Caster displays weather data based on:
 - Valid key from [OpenWeather](https://openweathermap.org/)
 
 ## :gear: Installation
-- Copy .env.sample to .env and provide a value for GOT_API_KEY
+- Copy `.env.sample` to `.env` and provide a value for `GOT_API_KEY`
 
 ```sh
 # install modules (node_modules)
