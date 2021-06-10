@@ -1,7 +1,7 @@
 const got = require('got');
 const { createResponse } = require('../entity');
-const { getUrlByCity, getUrlByZipCode } = require('../config/config');
+const { configHelper } = require('../helper');
 const { makeFetchByCityName, makeFetchByZipCode } = require('./data-access');
 
-exports.fetchWeatherByCityName = makeFetchByCityName(getUrlByCity, got, createResponse);
-exports.fetchWeatherByZipCode = makeFetchByZipCode(getUrlByZipCode, got, createResponse);
+exports.fetchWeatherByCityName = makeFetchByCityName(configHelper.getUrlByCity, got, createResponse);
+exports.fetchWeatherByZipCode = makeFetchByZipCode(configHelper.getUrlByZipCode, got, createResponse);

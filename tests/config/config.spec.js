@@ -1,5 +1,5 @@
 const { UNITS_CELSIUS, UNITS_FAHRENHEIT } = require('../../src/entity/request');
-const { getUrlByCity, getUrlByZipCode } = require('../../src/config/config');
+const { getUrlByCity, getUrlByZipCode } = require('../../src/helper/config');
 
 const appKey = process.env.GOT_API_KEY;
 

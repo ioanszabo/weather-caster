@@ -1,11 +1,11 @@
 const path = require('path');
 const fs = require('fs');
-const { createDefaultConfigurationFile } = require('../../src/config/config');
-const { createDefaultConfigurationEntity, getDefaultConfiguration } = require('../../src/config/config');
+const { createDefaultConfigurationFile } = require('../../src/helper/config');
+const { createDefaultConfigurationEntity, getDefaultConfiguration } = require('../../src/helper/config');
 const { CITY_SEARCH, UNITS_CELSIUS } = require('../../src/entity/request');
 
-test('Check if user already has a config file', () => {
-    const defaultConfiguration = getDefaultConfiguration(path.resolve('tests/config/location-with-config-file/.weather/config.json'));
+test('Check if user already has a helper file', () => {
+    const defaultConfiguration = getDefaultConfiguration(path.resolve('tests/helper/location-with-helper-file/.weather/helper.json'));
     const expected = {
         searchType: CITY_SEARCH,
         units: UNITS_CELSIUS
@@ -15,7 +15,7 @@ test('Check if user already has a config file', () => {
 });
 
 test('Configuration file is missing so null will be returned', () => {
-    const defaultConfiguration = getDefaultConfiguration(path.resolve('./location-without-config-file/.weather/config.json'));
+    const defaultConfiguration = getDefaultConfiguration(path.resolve('./location-without-helper-file/.weather/helper.json'));
 
     expect(defaultConfiguration).toBeNull();
 });
@@ -32,8 +32,8 @@ test('Create default configuration data', () => {
 });
 
 test('Create default configuration to given location', () => {
-    const location = path.resolve('./location-to-create-default-config-file/.weather/config.json');
-    const defaultConfiguration = getDefaultConfiguration(path.resolve('./location-without-config-file/.weather/config.json'));
+    const location = path.resolve('./location-to-create-default-helper-file/.weather/helper.json');
+    const defaultConfiguration = getDefaultConfiguration(path.resolve('./location-without-helper-file/.weather/helper.json'));
     if (!defaultConfiguration) {
         createDefaultConfigurationFile(location, createDefaultConfigurationEntity());
     }

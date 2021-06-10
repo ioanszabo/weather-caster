@@ -1,6 +1,6 @@
 const { createRequest } = require('../entity');
 
-exports.makeGetWeatherByCity = (
+exports.makeGetWeatherByCityUseCase = (
     findByCityName,
     transformToRequestEntity,
     saveLastConfig
