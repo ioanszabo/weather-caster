@@ -1,4 +1,4 @@
-`[![lunar-fetcher](https://i.imgur.com/yEchLhG.png)](#)
+[![lunar-fetcher](https://i.imgur.com/yEchLhG.png)](#)
 
 # nodejs-weather-caster
 A nodejs application that shows weather data for different cities from  [OpenWeather](https://openweathermap.org/).
