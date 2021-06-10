@@ -10,6 +10,7 @@ Weather Caster displays weather data based on:
 - **geolocation**
 
 ## :gear: Installation
+- Copy .env.sample to .env and provide a value for GOT_API_KEY.
 
 ```sh
 # install modules (node_modules)
@@ -58,6 +59,7 @@ node weather -h
 ```
 
 #### Notes
+- To get `GOT_API_KEY` sign in to https://openweathermap.org/ and create there a key
 - When using the `--import` or `-l` options `last-config.json` will not be updated
 
 ## :heavy_check_mark: Run tests
