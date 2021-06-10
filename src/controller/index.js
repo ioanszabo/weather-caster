@@ -33,5 +33,7 @@ exports.getHelp = () => {
     console.log('\t\tspecify zip code');
     console.log('\t--import');
     console.log('\t\tspecify a json file with cities - max 10 cities');
+    console.log('\t--nogeolocation');
+    console.log('\t\tweather --nogeolocation will prevent system to use your public ip address for current query');
     return [];
 };

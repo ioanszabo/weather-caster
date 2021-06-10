@@ -46,6 +46,12 @@ const router = async (args, weatherControllers, getHelp, hasArgumentsCli) => {
         args.t = showUnitOfTemperaturePrompt();
         return makeResponse([weatherControllers.getWeatherByCityController, args]);
     }
+    if (hasArgumentsCli(['nogeolocation'])) {
+        const args = {};
+        args.c = showCityPrompt();
+        args.t = showUnitOfTemperaturePrompt();
+        return makeResponse([weatherControllers.getWeatherByCityController, args]);
+    }
     if (hasArgumentsCli(['c', 't'])) {
         return makeResponse([weatherControllers.getWeatherByCityController, args]);
     }
