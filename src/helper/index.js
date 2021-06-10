@@ -21,3 +21,7 @@ exports.fileHelper = Object.freeze({
     readCities,
     saveLastConfig
 });
+
+exports.objectHelper = Object.freeze({
+    checkIfHasProperty: (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+});

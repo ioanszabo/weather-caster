@@ -15,3 +15,7 @@ exports.makeFetchByZipCode = (getByZipCodeUrl, got, createResponse) => async (re
         return createResponse(error.response.body);
     }
 };
+
+exports.makeFetchCityByIp = (ipApi) => async (ip) => {
+    return ipApi.getCityByIp(ip);
+};

@@ -1,30 +1,37 @@
 const prompt = require('prompt-sync')();
-const { fileHelper } = require('../helper');
+const { fileHelper, objectHelper } = require('../helper');
 
-const hasOwnProperty = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
-
-const showPrompt = () => {
-    const t = prompt('For Fahrenheit enter f, for Celsius enter c\n>');
+const showUnitOfTemperaturePrompt = () => {
+    const t = prompt('For Fahrenheit enter f, for Celsius enter c> ');
     if (['c', 'f'].indexOf(t) === -1) {
-        showPrompt();
+        showUnitOfTemperaturePrompt();
     } else {
         return t;
     }
 };
 
+const showCityPrompt = () => {
+    return prompt('Enter the city name> ');
+};
+
 const router = (args, weatherControllers) => {
-    if (hasOwnProperty(args, 'c') && hasOwnProperty(args, 't')) {
+    if (Object.keys(args).length === 0) {
+        args.c = showCityPrompt();
+        args.t = showUnitOfTemperaturePrompt();
         return [weatherControllers.getWeatherByCityController, args];
     }
-    if (hasOwnProperty(args, 'c')) {
-        args.t = showPrompt();
+    if (objectHelper.checkIfHasProperty(args, 'c') && objectHelper.checkIfHasProperty(args, 't')) {
         return [weatherControllers.getWeatherByCityController, args];
     }
-    if (hasOwnProperty(args, 'z') && hasOwnProperty(args, 't')) {
+    if (objectHelper.checkIfHasProperty(args, 'c')) {
+        args.t = showUnitOfTemperaturePrompt();
+        return [weatherControllers.getWeatherByCityController, args];
+    }
+    if (objectHelper.checkIfHasProperty(args, 'z') && objectHelper.checkIfHasProperty(args, 't')) {
         return [weatherControllers.getWeatherByZipCodeController, args];
     }
-    if (hasOwnProperty(args, 'z')) {
-        args.t = showPrompt();
+    if (objectHelper.checkIfHasProperty(args, 'z')) {
+        args.t = showUnitOfTemperaturePrompt();
         return [weatherControllers.getWeatherByZipCodeController, args];
     }
 };
@@ -34,10 +41,10 @@ exports.fetchController = (weatherControllers) => (args) => {
     if (useCase) {
         return useCase;
     }
-    if (hasOwnProperty(args, 'import')) {
+    if (objectHelper.checkIfHasProperty(args, 'import')) {
         return [weatherControllers.getWeatherForMultipleCitiesController, args];
     }
-    if (hasOwnProperty(args, 'l')) {
+    if (objectHelper.checkIfHasProperty(args, 'l')) {
         const cliArgumentsFromFile = fileHelper.loadLastConfig();
         return router(cliArgumentsFromFile, weatherControllers);
     }

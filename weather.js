@@ -9,9 +9,10 @@ try {
     const [controller, args] = fetchController(weatherControllers)(cliArguments);
     const weatherDetails = controller(args);
     weatherDetails.map((promiseResponse) => {
-        return promiseResponse.then((data) => {
-            console.log(data.getData());
-        })
+        return promiseResponse
+            .then((data) => {
+                console.log(data.getData());
+            })
             .catch((err) => {
                 console.error(err);
             });

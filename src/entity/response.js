@@ -12,6 +12,7 @@ exports.makeCreateResponse = (responseValidator) => (response) => {
         return Object.freeze({
             getData: () => Object.freeze({
                 name: response.name,
+                country: response.sys.country,
                 temp: response.main.temp,
                 humidity: response.main.humidity,
                 weatherDescription: response.weather.map((weather) => weather.description)
