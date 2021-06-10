@@ -68,4 +68,3 @@ node weather -h
 
 ## :scroll: License
 Apache License, Version 2.0 © Ioan-Adrian Szabo
-`

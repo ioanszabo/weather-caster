@@ -13,7 +13,6 @@ const displayError = (error) => console.log(error);
 try {
     const cliArguments = getRequestData(clp(process.argv), createRequest);
     const getControllerAndArguments = fetchController(weatherControllers, getHelp)(cliArguments);
-    console.log('loading...');
     getControllerAndArguments
         .then(executeControllerWithArguments)
         .then(waitForAllPromisesToResolve)
