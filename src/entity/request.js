@@ -10,10 +10,6 @@ exports.makeCreateRequest = (requestValidator) => ({ place, units }) => {
     }
     return Object.freeze({
         getPlace: () => place,
-        getUnits: () => units,
-        toJson: () => ({
-            place,
-            units
-        })
+        getUnits: () => units
     });
 };

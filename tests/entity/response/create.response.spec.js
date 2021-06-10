@@ -21,6 +21,7 @@ test('Create valid response', () => {
     const expected = {
         data: {
             name: 'Urdorf',
+            country: 'CH',
             temp: 17.44,
             humidity: 90,
             weatherDescription: ['heavy intensity rain']

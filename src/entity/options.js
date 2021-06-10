@@ -4,7 +4,7 @@ const { UNITS_CELSIUS, UNITS_FAHRENHEIT } = require('./request');
 exports.transformToRequestEntity = (options) => {
     return {
         place: options && options.c ? options.c : (options.z ? options.z : null),
-        units: options.t && options.t === 'c' ? UNITS_CELSIUS : UNITS_FAHRENHEIT
+        units: options.t && options.t === 'f' ? UNITS_FAHRENHEIT : UNITS_CELSIUS
     };
 };
 
@@ -17,10 +17,7 @@ exports.makeCreateOptions = (optionsValidator) => (cliArguments) => {
     }
     return Object.freeze({
         getPlace: () => (cliArguments.c ? cliArguments.c : cliArguments.z),
-        getUnits: () => cliArguments.t,
-        getRunLastCommand: () => (cliArguments.l ? cliArguments.l : false),
-        getUseGeolocation: () => (cliArguments.g ? cliArguments.g : false),
-        getHelp: () => (cliArguments.h ? cliArguments.h : false)
+        getUnits: () => cliArguments.t
     });
 };
 

@@ -1,4 +1,5 @@
 const fsExtra = require('fs-extra');
+const publicIp = require('public-ip');
 require('dotenv').config();
 const { makeGetUrlByCity, makeGetUrlByZipCode } = require('./got-api-helper');
 const { makeLoadLastConfig, makeSaveLastConfig, makeReadCities } = require('./file-helper');
@@ -24,4 +25,8 @@ exports.fileHelper = Object.freeze({
 
 exports.objectHelper = Object.freeze({
     checkIfHasProperty: (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+});
+
+exports.ipHelper = Object.freeze({
+    getMyPublicIp: () => publicIp.v4()
 });

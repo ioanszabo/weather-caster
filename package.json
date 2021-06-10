@@ -9,6 +9,8 @@
         "expand-home-dir": "^0.0.3",
         "fs-extra": "^10.0.0",
         "got": "^11.8.2",
+        "ip": "^1.1.5",
+        "node-fetch": "^2.6.1",
         "prompt": "^1.1.0",
         "prompt-sync": "^4.2.0",
         "prompts": "^2.4.1",

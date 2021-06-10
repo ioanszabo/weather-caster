@@ -1,4 +1,3 @@
-const { UNITS_CELSIUS } = require('../../../src/entity/request');
 const { createOptions, createRequest } = require('../../../src/entity');
 const { getRequestData } = require('../../../src/entity/options');
 
@@ -15,8 +14,6 @@ test('Create valid options entity', () => {
 
     expect(optionsEntity.getPlace()).toBe(expected.c);
     expect(optionsEntity.getUnits()).toBe(expected.t);
-    expect(optionsEntity.getRunLastCommand()).toBeFalsy();
-    expect(optionsEntity.getUseGeolocation()).toBeFalsy();
 });
 
 test.each([

@@ -4,19 +4,20 @@ const { createRequest } = require('./src/entity');
 const { getRequestData } = require('./src/entity/options');
 const { weatherControllers, getHelp } = require('./src/controller/index');
 
+const displayResults = (resolved) => resolved.map(((d) => console.log(d.getData())));
+const executeControllerWithArguments = ([controller, args]) => controller(args);
+const waitForAllPromisesToResolve = (weatherDetails) => Promise.all(weatherDetails);
+const displayError = (error) => console.log(error);
+
 try {
     const cliArguments = getRequestData(clp(process.argv), createRequest);
-    const [controller, args] = fetchController(weatherControllers, getHelp)(cliArguments);
-    const weatherDetails = controller(args);
-    weatherDetails.map((promiseResponse) => {
-        return promiseResponse
-            .then((data) => {
-                console.log(data.getData());
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    });
+    const getControllerAndArguments = fetchController(weatherControllers, getHelp)(cliArguments);
+    console.log('loading...');
+    getControllerAndArguments
+        .then(executeControllerWithArguments)
+        .then(waitForAllPromisesToResolve)
+        .then(displayResults)
+        .catch(displayError);
 
 } catch (error) {
     console.log(error.message);
