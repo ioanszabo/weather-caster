@@ -15,8 +15,7 @@
     },
     "name": "weather",
     "version": "1.0.0",
-    "description": "Fetches weather data for given place.",
-    "main": "src/index.js",
+    "description": "A nodejs application that shows weather data for different cities from  [OpenWeather](https://openweathermap.org/).",
     "devDependencies": {
         "babel-eslint": "^10.1.0",
         "eslint": "^7.28.0",
@@ -29,5 +28,5 @@
         "test": "jest"
     },
     "author": "Ioan Adrian Szabo",
-    "license": "MIT"
+    "license": "Apache 2.0"
 }
