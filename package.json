@@ -6,12 +6,11 @@
     "dependencies": {
         "clp": "^4.0.12",
         "dotenv": "^10.0.0",
+        "external-ip": "^2.3.1",
         "fs-extra": "^10.0.0",
         "got": "^11.8.2",
-        "ip": "^1.1.5",
         "node-fetch": "^2.6.1",
         "prompt-sync": "^4.2.0",
-        "public-ip": "^4.0.4",
         "ramda": "^0.27.1"
     },
     "name": "weather",
