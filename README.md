@@ -10,7 +10,7 @@ Weather Caster displays weather data based on:
 - **geolocation**
 
 ## Prerequisites
-- Unix based operating system
+- Tested on Ubuntu 20.04 and on Windows 10
 - Valid key from [OpenWeather](https://openweathermap.org/)
 
 ## :gear: Installation
