@@ -1,16 +1,9 @@
 const prompt = require('prompt-sync')();
-const publicIp = require('public-ip');
+const { promisify } = require('util');
+const getIP = promisify(require('external-ip')());
 const fetch = require('node-fetch');
 const { fileHelper } = require('../helper');
-
-const showUnitOfTemperaturePrompt = (message = 'For Fahrenheit enter f, for Celsius enter c> ') => {
-    const t = prompt(message);
-    if (['c', 'f'].indexOf(t) === -1) {
-        return showUnitOfTemperaturePrompt('Enter a valid option - `c` or `f`');
-    }
-    return t;
-
-};
+const { weatherControllers, getHelp } = require('../controller');
 
 const showCityPrompt = (message = 'Enter city name> ') => {
     const input = prompt(message);
@@ -28,6 +21,15 @@ const showCityPromptGeoLocation = (city) => {
     return input;
 };
 
+const showUnitOfTemperaturePrompt = (message = 'For Fahrenheit enter f, for Celsius enter c> ') => {
+    const t = prompt(message);
+    if (['c', 'f'].indexOf(t) === -1) {
+        return showUnitOfTemperaturePrompt('Enter a valid option - `c` or `f`');
+    }
+    return t;
+
+};
+
 const makeResponse = (response) => {
     return new Promise((resolve) => resolve(response));
 };
@@ -37,9 +39,17 @@ const makeHasArgumentsCli = (cliArguments) => (keys) => {
     return keys.every((key) => cliArgumentsKeys.indexOf(key) > -1);
 };
 
-const router = async (args, weatherControllers, getHelp, hasArgumentsCli) => {
+const router = async (
+    args,
+    weatherControllers,
+    getHelp,
+    hasArgumentsCli,
+    showCityPrompt,
+    showCityPromptGeoLocation,
+    showUnitOfTemperaturePrompt
+) => {
     if (Object.keys(args).length === 0) {
-        const ip = await publicIp.v4();
+        const ip = await getIP();
         const response = await fetch(`http://ip-api.com/json/${ip}`);
         const locationDetails = await response.json();
         args.c = showCityPromptGeoLocation(locationDetails.city);
@@ -75,9 +85,20 @@ const router = async (args, weatherControllers, getHelp, hasArgumentsCli) => {
     }
 };
 
-exports.fetchController = (weatherControllers, getHelp) => async (args) => {
+const makeFetchController = (
+    weatherControllers, getHelp, fileHelper, showCityPrompt, showCityPromptGeoLocation, showUnitOfTemperaturePrompt
+) => async (args) => {
+
     const hasArgumentsCli = makeHasArgumentsCli(args);
-    const useCase = await router(args, weatherControllers, getHelp, hasArgumentsCli);
+    const useCase = await router(
+        args,
+        weatherControllers,
+        getHelp,
+        hasArgumentsCli,
+        showCityPrompt,
+        showCityPromptGeoLocation,
+        showUnitOfTemperaturePrompt);
+
     if (useCase) {
         return makeResponse(useCase);
     }
@@ -87,6 +108,17 @@ exports.fetchController = (weatherControllers, getHelp) => async (args) => {
     if (hasArgumentsCli(['l'])) {
         const cliArgumentsFromFile = fileHelper.loadLastConfig();
         const hasArgumentsCli = makeHasArgumentsCli(cliArgumentsFromFile);
-        return router(cliArgumentsFromFile, weatherControllers, getHelp, hasArgumentsCli);
+        return router(
+            cliArgumentsFromFile,
+            weatherControllers,
+            getHelp,
+            hasArgumentsCli,
+            showCityPrompt,
+            showCityPromptGeoLocation,
+            showUnitOfTemperaturePrompt);
     }
 };
+
+exports.makeFetchController = makeFetchController;
+exports.fetchController = makeFetchController(
+    weatherControllers, getHelp, fileHelper, showCityPrompt, showCityPromptGeoLocation, showUnitOfTemperaturePrompt);

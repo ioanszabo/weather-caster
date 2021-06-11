@@ -1,10 +1,12 @@
 const fsExtra = require('fs-extra');
-const publicIp = require('public-ip');
+const path = require('path');
+const os = require('os');
 require('dotenv').config();
 const { makeGetUrlByCity, makeGetUrlByZipCode } = require('./got-api-helper');
 const { makeLoadLastConfig, makeSaveLastConfig, makeReadCities } = require('./file-helper');
 
-const location = process.env.LATEST_CONFIG;
+const homeDirectory = os.homedir();
+const location = path.resolve(`${homeDirectory}/${process.env.LATEST_CONFIG}`);
 const baseUrl = process.env.GOT_BASE_URL;
 const appKey = process.env.GOT_API_KEY;
 
@@ -21,12 +23,4 @@ exports.fileHelper = Object.freeze({
     loadLastConfig,
     readCities,
     saveLastConfig
-});
-
-exports.objectHelper = Object.freeze({
-    checkIfHasProperty: (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-});
-
-exports.ipHelper = Object.freeze({
-    getMyPublicIp: () => publicIp.v4()
 });
